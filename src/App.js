@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+/**
+ * @author [Sanjeewa Ranuluge]
+ * @email [sbandra725@gmail.com]
+ * @create date 2021-06-16 00:42:21
+ * @modify date 2021-06-16 00:42:21
+ * @desc [description]
+ */
+import Home from "./pages/Home";
+import ProductDetail from "./pages/ProductDetail";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/:productId" component={ProductDetail} />
+      </Switch>
+    </Router>
   );
 }
 
