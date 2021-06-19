@@ -5,7 +5,7 @@
  * @modify date 2021-06-16 00:42:21
  * @desc [description]
  */
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter  as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
 import ProductDetail from "./pages/ProductDetail";
