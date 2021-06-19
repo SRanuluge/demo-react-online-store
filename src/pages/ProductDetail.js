@@ -8,9 +8,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSelectedProductDetail, removeProducts } from "../actions";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
+import classes from "./ProductDetail.module.css";
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
   const { productId } = useParams();
   const { productsReducer } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -21,19 +22,28 @@ const ProductDetail = () => {
     return () => {
       dispatch(removeProducts());
     };
-  }, []);
+  }, [productId, dispatch]);
   return (
-    <div style={{ width: "100%", height: "100%" }}>
-      {!!productsReducer.selectedProductDetail ? 
+    <div className={classes.container}>
+      {!!productsReducer.selectedProductDetail ? (
         [productsReducer.selectedProductDetail].map((item) => (
-          <div  key={item.id} style={{ width: "100%", height: "100%" }}>
-            <img style={{ width: "auto", height: 150 }} src={`${item.image}`} />
-            <h2>{item.title}</h2>
-            <h4>{item.category}</h4>
-            <span>{item.price}</span>
-            <p>{item.description}</p>
+          <div key={item.id} className={classes.inner_container}>
+            <div className={classes.img_container}>
+              <img src={`${item.image}`} alt="logo" />
+            </div>
+            <div className={classes.des_container}>
+              <h3>{item.title}</h3>
+              <span>Price : ${item.price} </span>
+              <p>Description : {item.description}</p>
+              <h3>Category : {item.category}</h3>
+            </div>
           </div>
-        )) :<div>Loading....</div>}
+        ))
+      ) : (
+        <div className={classes.loading}>
+          <h2>Loading...</h2>
+        </div>
+      )}
     </div>
   );
 };
